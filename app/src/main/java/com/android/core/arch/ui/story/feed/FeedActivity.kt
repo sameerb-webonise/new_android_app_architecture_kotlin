@@ -2,15 +2,13 @@ package com.android.core.arch.ui.story.feed
 
 import android.os.Bundle
 import android.view.View
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.core.arch.R
 import com.android.core.arch.ui.base.BaseActivity
 import com.google.android.material.snackbar.Snackbar
-
-import javax.inject.Inject
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.activity_feeds.*
+import javax.inject.Inject
 
 /**
  * FeedActivity to render latest feed from available
@@ -19,7 +17,8 @@ import kotlinx.android.synthetic.main.activity_feeds.*
  * @author Rohit Anvekar
  * @since 2019-02-16
  */
-class FeedActivity : BaseActivity<FeedViewModel>(), FeedNavigator, SwipeRefreshLayout.OnRefreshListener {
+class FeedActivity : BaseActivity<FeedViewModel>(), FeedNavigator,
+    SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     override lateinit var viewModel: FeedViewModel
@@ -32,7 +31,7 @@ class FeedActivity : BaseActivity<FeedViewModel>(), FeedNavigator, SwipeRefreshL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feeds)
         //ButterKnife.bind(this)
-        viewModel!!.navigator = this
+        viewModel.navigator = this
         setupViews()
     }
 
@@ -40,7 +39,7 @@ class FeedActivity : BaseActivity<FeedViewModel>(), FeedNavigator, SwipeRefreshL
         feedSwipeRefreshView!!.setOnRefreshListener(this)
         feedRecyclerView!!.layoutManager = LinearLayoutManager(this)
         displayProgress(View.VISIBLE)
-        viewModel!!.getLatestFeed()
+        viewModel.getLatestFeed()
     }
 
     override fun openNextActivity() {
@@ -48,9 +47,9 @@ class FeedActivity : BaseActivity<FeedViewModel>(), FeedNavigator, SwipeRefreshL
     }
 
     override fun displayFeeds() {
-        if (viewModel!!.feed != null) {
-            title = viewModel!!.feed!!.title
-            mFeedAdapter!!.addFeeds(viewModel!!.feed)
+        if (viewModel.feed != null) {
+            title = viewModel.feed!!.title
+            mFeedAdapter.addFeeds(viewModel.feed)
             feedRecyclerView!!.adapter = mFeedAdapter
         }
         displayProgress(View.GONE)
@@ -63,19 +62,19 @@ class FeedActivity : BaseActivity<FeedViewModel>(), FeedNavigator, SwipeRefreshL
 
     override fun displayMessage(messageResId: Int) {
         Snackbar.make(feedSwipeRefreshView!!, messageResId, Snackbar.LENGTH_LONG)
-                .setAction(R.string.try_again) {
-                    feedSwipeRefreshView!!.isRefreshing = true
-                    viewModel!!.getLatestFeed()
-                }
-                .show()
+            .setAction(R.string.try_again) {
+                feedSwipeRefreshView!!.isRefreshing = true
+                viewModel.getLatestFeed()
+            }
+            .show()
     }
 
     override fun onRefresh() {
-        viewModel!!.getLatestFeed()
+        viewModel.getLatestFeed()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel!!.onCleared()
+        viewModel.onCleared()
     }
 }

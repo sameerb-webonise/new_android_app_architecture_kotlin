@@ -10,7 +10,8 @@ import com.android.core.arch.ui.base.BaseViewModel
  * @author Rohit Anvekar
  * @since 2019-02-15
  */
-class SplashViewModel(dataManager: DataManager, schedulerProvider: SchedulerProvider) : BaseViewModel<SplashNavigator>(dataManager, schedulerProvider) {
+class SplashViewModel(dataManager: DataManager, schedulerProvider: SchedulerProvider) :
+    BaseViewModel<SplashNavigator>(dataManager, schedulerProvider) {
 
     override var navigator: SplashNavigator?
         get() = super.navigator

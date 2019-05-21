@@ -1,7 +1,6 @@
 package com.android.core.arch.ui.story.feed
 
 import android.text.TextUtils
-
 import com.android.core.arch.BuildConfig
 import com.android.core.arch.R
 import com.android.core.arch.data.manager.DataManager
@@ -10,8 +9,6 @@ import com.android.core.arch.ui.base.BaseViewModel
 import com.android.core.arch.ui.story.feed.model.Feeds
 import com.android.core.arch.utils.Constants
 import com.google.gson.Gson
-
-import io.reactivex.disposables.Disposable
 
 /**
  * FeedViewModel will process data through [DataManager] and
@@ -32,7 +29,8 @@ class FeedViewModel
  * @param dataManager
  * @param schedulerProvider
  */
-(dataManager: DataManager, schedulerProvider: SchedulerProvider) : BaseViewModel<FeedNavigator>(dataManager, schedulerProvider) {
+    (dataManager: DataManager, schedulerProvider: SchedulerProvider) :
+    BaseViewModel<FeedNavigator>(dataManager, schedulerProvider) {
 
     var feed: Feeds? = null
         private set
@@ -43,22 +41,22 @@ class FeedViewModel
      */
     fun getLatestFeed() {
         val feedsDisposable = dataManager
-                .remoteApiService
-                .getNewsFeed(BuildConfig.FEED_BASE_URL)
-                .doOnNext { responseBody -> saveFeeds(responseBody.string()) }
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .subscribe(
-                        { responseBody ->
-                            loadFeeds()
-                            navigator!!.displayFeeds()
-                        },
-                        { throwable ->
-                            throwable.printStackTrace()
-                            loadFeeds()
-                            navigator!!.displayFeeds()
-                            navigator!!.displayMessage(R.string.fail_to_load_latest_feeds)
-                        })
+            .remoteApiService
+            .getNewsFeed(BuildConfig.FEED_BASE_URL)
+            .doOnNext { responseBody -> saveFeeds(responseBody.string()) }
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .subscribe(
+                { responseBody ->
+                    loadFeeds()
+                    navigator!!.displayFeeds()
+                },
+                { throwable ->
+                    throwable.printStackTrace()
+                    loadFeeds()
+                    navigator!!.displayFeeds()
+                    navigator!!.displayMessage(R.string.fail_to_load_latest_feeds)
+                })
         compositeDisposable.add(feedsDisposable)
     }
 
@@ -80,7 +78,10 @@ class FeedViewModel
      */
     fun loadFeeds(): Feeds? {
         val gson = Gson()
-        feed = gson.fromJson<Feeds>(dataManager.sharedPrefsService.getStringValue(Constants.PREF_KEY_FEEDS), Feeds::class.java!!)
+        feed = gson.fromJson<Feeds>(
+            dataManager.sharedPrefsService.getStringValue(Constants.PREF_KEY_FEEDS),
+            Feeds::class.java
+        )
         return feed
     }
 
@@ -90,6 +91,6 @@ class FeedViewModel
 
     companion object {
 
-        val TAG = FeedViewModel::class.java!!.getName()
+        val TAG = FeedViewModel::class.java.name
     }
 }

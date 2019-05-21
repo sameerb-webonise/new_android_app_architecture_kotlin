@@ -22,7 +22,12 @@ object ActivityUtils {
      * @param finishActivity boolean variable to decide whether to finish the activity or not
      */
     @JvmOverloads
-    fun goToNextActivity(context: Context, clazz: Class<*>, bundle: Bundle? = null, finishActivity: Boolean = false) {
+    fun goToNextActivity(
+        context: Context,
+        clazz: Class<*>,
+        bundle: Bundle? = null,
+        finishActivity: Boolean = false
+    ) {
         val intent = Intent(context, clazz)
 
         if (bundle != null) {
@@ -42,7 +47,7 @@ object ActivityUtils {
      * @return
      */
     fun isIntentBundleAvailable(intent: Intent?): Boolean {
-        return if (intent != null && intent.extras != null) true else false
+        return intent != null && intent.extras != null
     }
 
     /**
@@ -70,7 +75,13 @@ object ActivityUtils {
      * @param finishActivity boolean variable to decide whether to finish the activity or not
      * @param clearBackstack boolean variable to decide whether to clear the backstack or not
      */
-    fun goToNextActivity(context: Context, clazz: Class<*>, bundle: Bundle?, finishActivity: Boolean, clearBackstack: Boolean) {
+    fun goToNextActivity(
+        context: Context,
+        clazz: Class<*>,
+        bundle: Bundle?,
+        finishActivity: Boolean,
+        clearBackstack: Boolean
+    ) {
         val intent = Intent(context, clazz)
 
         if (clearBackstack) {

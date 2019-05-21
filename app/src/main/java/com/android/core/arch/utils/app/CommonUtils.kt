@@ -3,18 +3,13 @@ package com.android.core.arch.utils.app
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.res.AssetManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.provider.Settings
 import android.telephony.TelephonyManager
-
 import java.io.IOException
-import java.io.InputStream
-import java.nio.charset.Charset
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -54,8 +49,9 @@ object CommonUtils {
             deviceId = mTelephony.deviceId
         } else {
             deviceId = Settings.Secure.getString(
-                    context.contentResolver,
-                    Settings.Secure.ANDROID_ID)
+                context.contentResolver,
+                Settings.Secure.ANDROID_ID
+            )
         }
         return deviceId
     }
@@ -68,7 +64,8 @@ object CommonUtils {
     fun isEmailValid(email: String): Boolean {
         val pattern: Pattern
         val matcher: Matcher
-        val EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        val EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         pattern = Pattern.compile(EMAIL_PATTERN)
         matcher = pattern.matcher(email)
         return matcher.matches()

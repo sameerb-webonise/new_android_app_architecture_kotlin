@@ -3,19 +3,11 @@ package com.android.core.arch.phone.location
 import android.content.Context
 import android.location.Location
 import android.os.Looper
-
 import com.android.core.arch.data.storage.local.sharedprefs.SharedPrefsHelper
 import com.android.core.arch.utils.app.AppLogger
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import io.reactivex.annotations.NonNull
 
 
 /**
@@ -29,7 +21,7 @@ import io.reactivex.annotations.NonNull
 class LocationService @Inject
 constructor(private val mContext: Context, mSharedPrefsHelper: SharedPrefsHelper) {
 
-    private val TAG = LocationService::class.java!!.getName()
+    private val TAG = LocationService::class.java.name
     private val mSharedPrefsHelper: SharedPrefsHelper? = null
     private var mLocationRequest: LocationRequest? = null
     private var mFusedLocationClient: FusedLocationProviderClient? = null
@@ -78,8 +70,10 @@ constructor(private val mContext: Context, mSharedPrefsHelper: SharedPrefsHelper
     fun requestLocationUpdates() {
         AppLogger.i(TAG, "Requesting location updates")
         try {
-            mFusedLocationClient!!.requestLocationUpdates(mLocationRequest,
-                    mLocationCallback!!, Looper.myLooper())
+            mFusedLocationClient!!.requestLocationUpdates(
+                mLocationRequest,
+                mLocationCallback!!, Looper.myLooper()
+            )
         } catch (unlikely: SecurityException) {
             AppLogger.e(TAG, "Lost location permission. Could not request updates. $unlikely")
         }
@@ -108,14 +102,17 @@ constructor(private val mContext: Context, mSharedPrefsHelper: SharedPrefsHelper
     fun getLastLocation() {
         try {
             mFusedLocationClient!!.lastLocation
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful && task.result != null) {
-                            location = task.result
-                            AppLogger.i(TAG, "getLastLocation Location: Lat: " + location!!.latitude + " Long: " + location!!.longitude)
-                        } else {
-                            AppLogger.i(TAG, "Failed to get location.")
-                        }
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful && task.result != null) {
+                        location = task.result
+                        AppLogger.i(
+                            TAG,
+                            "getLastLocation Location: Lat: " + location!!.latitude + " Long: " + location!!.longitude
+                        )
+                    } else {
+                        AppLogger.i(TAG, "Failed to get location.")
                     }
+                }
         } catch (unlikely: SecurityException) {
             AppLogger.e(TAG, "Lost location permission.$unlikely")
         }
@@ -124,7 +121,10 @@ constructor(private val mContext: Context, mSharedPrefsHelper: SharedPrefsHelper
 
     private fun onNewLocation(location: Location) {
         this.location = location
-        AppLogger.i(TAG, "onNewLocation Location: Lat: " + this.location!!.latitude + " Long: " + this.location!!.longitude)
+        AppLogger.i(
+            TAG,
+            "onNewLocation Location: Lat: " + this.location!!.latitude + " Long: " + this.location!!.longitude
+        )
     }
 
     companion object {

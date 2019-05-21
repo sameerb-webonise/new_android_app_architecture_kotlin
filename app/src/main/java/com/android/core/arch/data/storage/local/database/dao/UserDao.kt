@@ -1,13 +1,8 @@
 package com.android.core.arch.data.storage.local.database.dao
 
 
+import androidx.room.*
 import com.android.core.arch.data.storage.local.database.table.User
-
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 
 /**
  * User Dao

@@ -19,8 +19,10 @@ import dagger.Provides
 @Module
 class FeedActivityModule {
     @Provides
-    internal fun provideFeedViewModel(dataManager: DataManager,
-                                      schedulerProvider: SchedulerProvider): FeedViewModel {
+    internal fun provideFeedViewModel(
+        dataManager: DataManager,
+        schedulerProvider: SchedulerProvider
+    ): FeedViewModel {
         return FeedViewModel(dataManager, schedulerProvider)
     }
 

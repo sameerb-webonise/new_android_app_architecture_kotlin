@@ -10,10 +10,13 @@ class AppConstants private constructor()// This utility class is not publicly in
 
 
     object Patterns {
-        val EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+        val EMAIL_PATTERN =
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         val USERNAME_PATTERN = "^[a-zA-Z0-9]{3,20}$"
-        val NAME_PATTERN = "^(?!(\\S+[\\-']$))(?!(\\S*[\\-']{2}\\S*$))(?=\\S{1,35}$)([a-zA-Z]['\\-a-zA-Z]*)$"
-        val PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[A-Za-z])(?!^[~!@#\\$%^&*()_+\\-=]*$)([a-zA-Z0-9~!@#\\$%^&*()_+\\-=]{6,20})$"
+        val NAME_PATTERN =
+            "^(?!(\\S+[\\-']$))(?!(\\S*[\\-']{2}\\S*$))(?=\\S{1,35}$)([a-zA-Z]['\\-a-zA-Z]*)$"
+        val PASSWORD_PATTERN =
+            "^(?=.*\\d)(?=.*[A-Za-z])(?!^[~!@#\\$%^&*()_+\\-=]*$)([a-zA-Z0-9~!@#\\$%^&*()_+\\-=]{6,20})$"
     }
 
     companion object {

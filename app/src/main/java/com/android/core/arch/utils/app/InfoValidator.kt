@@ -71,10 +71,11 @@ object InfoValidator {
     }
 
     fun isValidMobileNumber(mobileNumber: String): Boolean {
-        val REGEX_PATTERN_CONTACT_NUMBER = "\\+?(\\d{10,15}|\\(?\\d{3}\\)?[-.\\s]\\d{3}[-.\\s]\\d{4})"
+        val REGEX_PATTERN_CONTACT_NUMBER =
+            "\\+?(\\d{10,15}|\\(?\\d{3}\\)?[-.\\s]\\d{3}[-.\\s]\\d{4})"
 
         return isNotNullOrBlank(mobileNumber) && Pattern.compile(REGEX_PATTERN_CONTACT_NUMBER)
-                .matcher(mobileNumber).matches()
+            .matcher(mobileNumber).matches()
     }
 
 

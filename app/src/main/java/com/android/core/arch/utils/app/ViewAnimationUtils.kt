@@ -14,9 +14,10 @@ object ViewAnimationUtils {
 
     fun scaleAnimateView(view: View) {
         val animation = ScaleAnimation(
-                1.15f, 1f, 1.15f, 1f,
-                Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f)
+            1.15f, 1f, 1.15f, 1f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
 
         view.animation = animation
         animation.duration = 100

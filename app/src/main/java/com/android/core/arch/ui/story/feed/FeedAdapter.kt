@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
+import androidx.recyclerview.widget.RecyclerView
 import com.android.core.arch.R
 import com.android.core.arch.ui.base.BaseViewHolder
 import com.android.core.arch.ui.story.feed.model.Feeds
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.feed_recycler_item_view.*
 
@@ -30,12 +29,13 @@ class FeedAdapter
  *
  * @param context
  */
-(private val mContext: Context) : RecyclerView.Adapter<BaseViewHolder>() {
+    (private val mContext: Context) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private var mFeeds: Feeds? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        val activityView = LayoutInflater.from(parent.context).inflate(R.layout.feed_recycler_item_view, parent, false)
+        val activityView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.feed_recycler_item_view, parent, false)
         return FeedViewHolder(activityView, activityView)
     }
 
@@ -56,7 +56,8 @@ class FeedAdapter
     /**
      * FeedViewHolder class to hold bind view with adpater.
      */
-    inner class FeedViewHolder(feedView: View, override val containerView: View?) : BaseViewHolder(feedView), View.OnClickListener, LayoutContainer {
+    inner class FeedViewHolder(feedView: View, override val containerView: View?) :
+        BaseViewHolder(feedView), View.OnClickListener, LayoutContainer {
 
         init {
             feedView.setOnClickListener(this)
@@ -78,15 +79,16 @@ class FeedAdapter
             }
 
             Glide.with(mContext)
-                    .load(row.imageHref)
-                    .placeholder(R.drawable.ic_default_placeholder)
-                    .error(R.drawable.ic_image_not_found)
-                    .diskCacheStrategy(DiskCacheStrategy.RESULT).skipMemoryCache(true)
-                    .into(feedImgView!!)
+                .load(row.imageHref)
+                .placeholder(R.drawable.ic_default_placeholder)
+                .error(R.drawable.ic_image_not_found)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT).skipMemoryCache(true)
+                .into(feedImgView!!)
         }
 
         override fun onClick(v: View) {
-            Toast.makeText(mContext, mFeeds!!.rows!![adapterPosition].title, Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, mFeeds!!.rows!![adapterPosition].title, Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }

@@ -14,4 +14,8 @@ import javax.inject.Inject
  * @since 2019-02-14
  */
 class AppDataManager @Inject
-constructor(override val context: Context, override val remoteApiService: RemoteApiService, override val sharedPrefsService: SharedPrefsService) : DataManager
+constructor(
+    override val context: Context,
+    override val remoteApiService: RemoteApiService,
+    override val sharedPrefsService: SharedPrefsService
+) : DataManager

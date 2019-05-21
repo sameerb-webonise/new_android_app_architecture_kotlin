@@ -1,11 +1,10 @@
 package com.android.core.arch.data.storage.local.database.core
 
 
-import com.android.core.arch.data.storage.local.database.dao.UserDao
-import com.android.core.arch.data.storage.local.database.table.User
-
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.android.core.arch.data.storage.local.database.dao.UserDao
+import com.android.core.arch.data.storage.local.database.table.User
 
 /**
  * Core Room Database class for application

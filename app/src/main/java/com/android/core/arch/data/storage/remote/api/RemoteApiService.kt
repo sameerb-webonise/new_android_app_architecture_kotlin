@@ -1,10 +1,9 @@
 package com.android.core.arch.data.storage.remote.api
 
-import javax.inject.Inject
-
 import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 /**
  * RemoteApiService class to provide dependency service for remote data

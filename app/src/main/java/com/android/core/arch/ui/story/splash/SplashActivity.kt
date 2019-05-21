@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-
 import com.android.core.arch.R
 import com.android.core.arch.ui.base.BaseActivity
 import com.android.core.arch.ui.story.feed.FeedActivity
-
-import javax.inject.Inject
 import kotlinx.android.synthetic.main.activity_splash.*
+import javax.inject.Inject
 
 /**
  * Splash Activity is launcher activity which can perform initially configure
@@ -28,7 +26,7 @@ class SplashActivity : BaseActivity<SplashViewModel>(), SplashNavigator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        viewModel!!.navigator = this
+        viewModel.navigator = this
         setupViews()
     }
 
@@ -53,6 +51,6 @@ class SplashActivity : BaseActivity<SplashViewModel>(), SplashNavigator {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel!!.onCleared()
+        viewModel.onCleared()
     }
 }

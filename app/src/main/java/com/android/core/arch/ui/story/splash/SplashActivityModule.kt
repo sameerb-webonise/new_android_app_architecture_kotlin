@@ -16,8 +16,10 @@ import dagger.Provides
 @Module
 class SplashActivityModule {
     @Provides
-    internal fun provideSplashViewModel(dataManager: DataManager,
-                                        schedulerProvider: SchedulerProvider): SplashViewModel {
+    internal fun provideSplashViewModel(
+        dataManager: DataManager,
+        schedulerProvider: SchedulerProvider
+    ): SplashViewModel {
         return SplashViewModel(dataManager, schedulerProvider)
     }
 }

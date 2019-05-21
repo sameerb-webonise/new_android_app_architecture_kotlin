@@ -1,12 +1,9 @@
 package com.android.core.arch.data.storage.local.database.core
 
 import com.android.core.arch.data.storage.local.database.table.User
-import java.util.concurrent.Callable
-
+import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
-
-import io.reactivex.Observable
 
 
 /**

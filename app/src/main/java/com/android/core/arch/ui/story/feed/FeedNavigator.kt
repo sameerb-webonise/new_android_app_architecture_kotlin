@@ -1,8 +1,7 @@
 package com.android.core.arch.ui.story.feed
 
-import com.android.core.arch.ui.base.BaseNavigator
-
 import androidx.annotation.StringRes
+import com.android.core.arch.ui.base.BaseNavigator
 
 /**
  * @author Rohit Anvekar

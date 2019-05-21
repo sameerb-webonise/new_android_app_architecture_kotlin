@@ -12,7 +12,8 @@ import javax.inject.Inject
  * @since 2019-02-14
  */
 class SharedPrefsService @Inject
-constructor(context: Context, @SharedPreferenceInfo preferenceFileName: String) : SharedPrefsHelper {
+constructor(context: Context, @SharedPreferenceInfo preferenceFileName: String) :
+    SharedPrefsHelper {
 
     private val mSharedPreferences: SharedPreferences
 

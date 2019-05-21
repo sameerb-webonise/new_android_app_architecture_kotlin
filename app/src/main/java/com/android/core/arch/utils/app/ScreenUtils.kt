@@ -14,7 +14,7 @@ object ScreenUtils {
 
     fun getScreenWidth(context: Context): Int {
         val windowManager = context
-                .getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            .getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val dm = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         return dm.widthPixels
@@ -22,7 +22,7 @@ object ScreenUtils {
 
     fun getScreenHeight(context: Context): Int {
         val windowManager = context
-                .getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            .getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val dm = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(dm)
         return dm.heightPixels
@@ -31,7 +31,7 @@ object ScreenUtils {
     fun getStatusBarHeight(context: Context): Int {
         var result = 0
         val resourceId = context.resources
-                .getIdentifier("status_bar_height", "dimen", "android")
+            .getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
             result = context.resources.getDimensionPixelSize(resourceId)
         }

@@ -2,10 +2,9 @@ package com.android.core.arch.data.manager
 
 import android.content.Context
 import android.content.SharedPreferences
-
+import androidx.appcompat.app.AppCompatActivity
 import com.android.core.arch.data.storage.local.sharedprefs.SharedPrefsService
 import com.android.core.arch.data.storage.remote.api.RemoteApiService
-import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Retrofit
 
 /**

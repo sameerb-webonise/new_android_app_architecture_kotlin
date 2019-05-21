@@ -1,15 +1,13 @@
 package com.android.core.arch.ui.base
 
 import android.annotation.TargetApi
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-
-import java.util.ArrayList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import dagger.android.AndroidInjection
+import java.util.*
 
 
 /**
@@ -33,10 +31,6 @@ abstract class BaseActivity<V : BaseViewModel<*>> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         performDependencyInjection()
         super.onCreate(savedInstanceState)
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(newBase)
     }
 
 
@@ -63,7 +57,10 @@ abstract class BaseActivity<V : BaseViewModel<*>> : AppCompatActivity() {
                 }
             }
             if (!listPermissions.isEmpty()) {
-                requestPermissionsSafely(listPermissions.toTypedArray<String>(), permissionRequestCode)
+                requestPermissionsSafely(
+                    listPermissions.toTypedArray<String>(),
+                    permissionRequestCode
+                )
                 return false
             }
         }
@@ -76,7 +73,7 @@ abstract class BaseActivity<V : BaseViewModel<*>> : AppCompatActivity() {
 
     companion object {
 
-        val TAG = BaseActivity::class.java!!.getName()
+        val TAG = BaseActivity::class.java.name
     }
 
 

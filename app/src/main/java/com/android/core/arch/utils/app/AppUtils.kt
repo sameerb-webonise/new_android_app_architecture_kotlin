@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.android.core.arch.R
-import java.util.ArrayList
+import java.util.*
 
 /**
  * App Utils Class
@@ -30,9 +30,7 @@ object AppUtils {
      */
     fun isListNotNullEmpty(list: ArrayList<*>?): Boolean {
 
-        return if (list != null && !list.isEmpty()) {
-            true
-        } else false
+        return list != null && !list.isEmpty()
     }
 
     /**
@@ -42,23 +40,33 @@ object AppUtils {
      */
     fun isListNotNullEmpty(list: List<*>?): Boolean {
 
-        return if (list != null && !list.isEmpty()) {
-            true
-        } else false
+        return list != null && !list.isEmpty()
     }
 
     fun openPlayStoreForApp(context: Context) {
         val appPackageName = context.packageName
         try {
-            context.startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse(context
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(
+                        context
                             .resources
-                            .getString(R.string.app_market_link) + appPackageName)))
+                            .getString(R.string.app_market_link) + appPackageName
+                    )
+                )
+            )
         } catch (e: android.content.ActivityNotFoundException) {
-            context.startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse(context
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(
+                        context
                             .resources
-                            .getString(R.string.app_google_play_store_link) + appPackageName)))
+                            .getString(R.string.app_google_play_store_link) + appPackageName
+                    )
+                )
+            )
         }
 
     }

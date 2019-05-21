@@ -2,21 +2,17 @@ package com.android.core.arch.di.module
 
 import android.app.Application
 import android.content.Context
-
 import com.android.core.arch.BuildConfig
 import com.android.core.arch.data.manager.AppDataManager
 import com.android.core.arch.data.manager.DataManager
+import com.android.core.arch.data.storage.local.sharedprefs.SharedPreferenceInfo
 import com.android.core.arch.data.storage.local.sharedprefs.SharedPrefsHelper
 import com.android.core.arch.data.storage.local.sharedprefs.SharedPrefsService
 import com.android.core.arch.data.storage.remote.api.RemoteApiHelper
 import com.android.core.arch.data.storage.remote.api.RemoteApiService
-import com.android.core.arch.data.storage.local.sharedprefs.SharedPreferenceInfo
 import com.android.core.arch.rx.AppSchedulerProvider
 import com.android.core.arch.rx.SchedulerProvider
 import com.android.core.arch.utils.Constants
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -24,6 +20,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 /**
  * Data module which provides following dependencies
@@ -82,7 +79,10 @@ class DataModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttpClient(cache: Cache, sharedPrefsService: SharedPrefsService): OkHttpClient {
+    internal fun provideOkHttpClient(
+        cache: Cache,
+        sharedPrefsService: SharedPrefsService
+    ): OkHttpClient {
         val client = OkHttpClient.Builder()
         client.cache(cache)
         return client.build()
@@ -93,23 +93,27 @@ class DataModule {
     @Singleton
     internal fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(BuildConfig.BASE_URL)
-                .client(okHttpClient)
-                .build()
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(okHttpClient)
+            .build()
     }
 
     @Provides
     @Singleton
     fun providesRemoteApiHelper(
-            retrofit: Retrofit): RemoteApiHelper {
-        return retrofit.create(RemoteApiHelper::class.java!!)
+        retrofit: Retrofit
+    ): RemoteApiHelper {
+        return retrofit.create(RemoteApiHelper::class.java)
     }
 
     @Provides
     @Singleton
-    internal fun provideRemoteApiService(retrofit: Retrofit, remoteApiHelper: RemoteApiHelper): RemoteApiService {
+    internal fun provideRemoteApiService(
+        retrofit: Retrofit,
+        remoteApiHelper: RemoteApiHelper
+    ): RemoteApiService {
         return RemoteApiService(retrofit, remoteApiHelper)
     }
 

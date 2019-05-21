@@ -15,13 +15,10 @@ import dagger.android.DaggerApplication
  */
 class CoreApplication : DaggerApplication() {
 
-    override fun applicationInjector() : AndroidInjector<out DaggerApplication> {
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder().application(this).build()
     }
 
-    override fun onCreate() {
-        super.onCreate()
-    }
 }
 
 

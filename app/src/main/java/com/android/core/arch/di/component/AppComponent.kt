@@ -1,17 +1,14 @@
 package com.android.core.arch.di.component
 
 import android.app.Application
-
 import com.android.core.arch.CoreApplication
 import com.android.core.arch.di.module.ActivityModule
 import com.android.core.arch.di.module.DataModule
-
-import javax.inject.Singleton
-
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
 /**
  * Application component  enable selected modules to perform dependency injection

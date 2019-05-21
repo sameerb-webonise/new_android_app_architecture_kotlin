@@ -2,7 +2,6 @@ package com.android.core.arch.utils.app
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 
 
 /**
